@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/core.dart';
+import '../../../presentation/companies/companies.dart';
 import '../../../widgets/widgets.dart';
 import '../home.dart';
 
@@ -21,23 +23,38 @@ class HomePage extends StatelessWidget {
       backgroundColor: AppColors.colorFunctionalSoftLightest,
       body: SafeArea(
         minimum: const EdgeInsets.fromLTRB(20, 30, 20, 20),
-        child: Column(
-          children: [
-            CompanyContainer(
-              onTap: () {},
-              title: 'Jaguar Unit',
-            ),
-            const SizedBox(height: 40),
-            CompanyContainer(
-              onTap: () {},
-              title: 'Tobias Unit',
-            ),
-            const SizedBox(height: 40),
-            CompanyContainer(
-              onTap: () {},
-              title: 'Apex Unit',
-            ),
-          ],
+        child: BlocBuilder<CompaniesCubit, CompaniesState>(
+          builder: (context, state) {
+            if (state is CompaniesLoading) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.colorBrandPrimaryDarkest,
+                ),
+              );
+            } else if (state is CompaniesLoaded) {
+              return ListView.builder(
+                itemCount: state.companies.length,
+                itemBuilder: (context, index) {
+                  var company = state.companies[index];
+                  return Column(
+                    children: [
+                      CompanyContainer(
+                        onTap: () {},
+                        title: company.name,
+                      ),
+                      if (index != (state.companies.length - 1))
+                        const SizedBox(height: 40),
+                    ],
+                  );
+                },
+              );
+            } else if (state is CompaniesError) {
+              return Center(
+                child: Text('Erro: ${state.message}'),
+              );
+            }
+            return Container();
+          },
         ),
       ),
     );
