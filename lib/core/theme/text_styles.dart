@@ -8,7 +8,7 @@ class AppTextStyles {
 
   static const TextStyle logoTextStyle = TextStyle(
     fontFamily: kFontFamilyLogo,
-    fontSize: 36,
+    fontSize: 28,
     fontWeight: FontWeight.w400,
     color: AppColors.colorFunctionalSoftLight,
     height: 1.5,
