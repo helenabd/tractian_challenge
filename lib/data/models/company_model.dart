@@ -17,10 +17,10 @@ class CompanyModel {
     );
   }
 
-  factory CompanyModel.fromJson(Map<String, dynamic> map) {
+  factory CompanyModel.fromJson(Map<String, dynamic> json) {
     return CompanyModel(
-      name: map['name'] ?? '',
-      id: map['id'] ?? '',
+      name: json['name'] ?? '',
+      id: json['id'] ?? '',
     );
   }
 

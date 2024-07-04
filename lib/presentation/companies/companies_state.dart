@@ -20,6 +20,19 @@ class CompaniesLoaded extends CompaniesState {
   List<Object?> get props => [companies];
 }
 
+class CompaniesLocationsAndAssetsLoaded extends CompaniesState {
+  final List<LocationModel> locations;
+  final List<AssetModel> assets;
+
+  CompaniesLocationsAndAssetsLoaded({
+    required this.locations,
+    required this.assets,
+  });
+
+  @override
+  List<Object?> get props => [locations, assets];
+}
+
 class CompaniesError extends CompaniesState {
   final String message;
 

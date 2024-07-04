@@ -17,4 +17,21 @@ class CompaniesCubit extends Cubit<CompaniesState> {
       emit(CompaniesError(error.toString()));
     }
   }
+
+  Future<void> fetchCompaniesLocationsAndAssets(
+      {required String companyId}) async {
+    try {
+      emit(CompaniesLoading());
+      final locations =
+          await apiService.fetchCompaniesLocation(companyId: companyId);
+      final assets =
+          await apiService.fetchCompaniesAssets(companyId: companyId);
+      emit(CompaniesLocationsAndAssetsLoaded(
+        assets: assets,
+        locations: locations,
+      ));
+    } catch (error) {
+      emit(CompaniesError(error.toString()));
+    }
+  }
 }

@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/core.dart';
+import '../../../presentation/presentation.dart';
 import '../../../widgets/widgets.dart';
 import '../components/components.dart';
 
-class AssetPage extends StatelessWidget {
+class AssetPage extends StatefulWidget {
   static const routeName = '/assets';
 
-  const AssetPage({super.key});
+  final String companyId;
+
+  const AssetPage({super.key, required this.companyId});
+
+  @override
+  State<AssetPage> createState() => _AssetPageState();
+}
+
+class _AssetPageState extends State<AssetPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    final locationAssetsCubit = context.read<LocationAssetsCubit>();
+    if (locationAssetsCubit.state is! LocationAssetsLoaded) {
+      locationAssetsCubit.fetchLocationsAndAssets(companyId: widget.companyId);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    double totalWidth = MediaQuery.sizeOf(context).width;
-
     return Scaffold(
         appBar: TreeViewAppBar.buildAppBar(
           context: context,
