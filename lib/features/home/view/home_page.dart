@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tractian_challenge/features/asset/view/asset_page.dart';
 
 import '../../../core/core.dart';
 import '../../../presentation/companies/companies.dart';
@@ -39,7 +40,12 @@ class HomePage extends StatelessWidget {
                   return Column(
                     children: [
                       CompanyContainer(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            settings: RouteSettings(name: AssetPage.routeName),
+                            builder: (context) => AssetPage(),
+                          ));
+                        },
                         title: company.name,
                       ),
                       if (index != (state.companies.length - 1))

@@ -13,6 +13,15 @@ class AppTextStyles {
     color: AppColors.colorFunctionalSoftLight,
     height: 1.5,
   );
+
+  static const TextStyle appbarTextStyle = TextStyle(
+    fontFamily: kFontFamilyBrand,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: AppColors.colorFunctionalSoftLightest,
+    height: 1.5,
+  );
+
   static const TextStyle companiesTextStyle = TextStyle(
     fontFamily: kFontFamilyBrand,
     fontSize: 18,
